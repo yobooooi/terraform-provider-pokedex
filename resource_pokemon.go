@@ -11,15 +11,15 @@ import (
 
 const pokemonAPI string = "https://pokeapi.co/api/v2/pokemon/"
 
-func resourceServer() *schema.Resource {
+func resourcePokemon() *schema.Resource {
 	return &schema.Resource{
-		Create: resourceServerCreate,
-		Read:   resourceServerRead,
-		Update: resourceServerUpdate,
-		Delete: resourceServerDelete,
+		Create: resourcePokemonCreate,
+		Read:   resourcePokemonRead,
+		Update: resourcePokemonUpdate,
+		Delete: resourcePokemonDelete,
 
 		Schema: map[string]*schema.Schema{
-			"uuid_count": &schema.Schema{
+			"pokemon_id": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
 			},
@@ -31,12 +31,12 @@ func resourceServer() *schema.Resource {
 	}
 }
 
-func resourceServerCreate(d *schema.ResourceData, m interface{}) error {
-	uuid_count := d.Get("uuid_count").(string)
+func resourcePokemonCreate(d *schema.ResourceData, m interface{}) error {
+	pokemon_id := d.Get("pokemon_id").(string)
 
-	d.SetId(uuid_count)
+	d.SetId(pokemon_id)
 
-	resp, err := http.Get(pokemonAPI + uuid_count)
+	resp, err := http.Get(pokemonAPI + pokemon_id)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -55,18 +55,18 @@ func resourceServerCreate(d *schema.ResourceData, m interface{}) error {
 		panic(err.Error())
 	}
 	d.Set("name", data["name"])
-	return resourceServerRead(d, m)
+	return resourcePokemonRead(d, m)
 }
 
-func resourceServerRead(d *schema.ResourceData, m interface{}) error {
+func resourcePokemonRead(d *schema.ResourceData, m interface{}) error {
 	return nil
 }
 
-func resourceServerUpdate(d *schema.ResourceData, m interface{}) error {
-	return resourceServerRead(d, m)
+func resourcePokemonUpdate(d *schema.ResourceData, m interface{}) error {
+	return resourcePokemonRead(d, m)
 }
 
-func resourceServerDelete(d *schema.ResourceData, m interface{}) error {
+func resourcePokemonDelete(d *schema.ResourceData, m interface{}) error {
 	d.SetId("")
 	return nil
 }

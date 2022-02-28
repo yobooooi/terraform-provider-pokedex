@@ -1,7 +1,7 @@
 terraform {  
   required_providers {    
-    basic = { 
-        source  = "terraform.local/local/basic"
+    pokedex = { 
+        source  = "terraform.local/local/pokedex"
         version = "1.0.0"
         }  
     }

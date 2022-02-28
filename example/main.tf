@@ -1,7 +1,7 @@
-resource "basic_resource" "basic_resource_namespace_01" {
-	uuid_count = "3"
+resource "pokedex_pokemon" "pokemon_encounter_01" {
+	pokemon_id = "45"
 }
 
-resource "basic_resource" "basic_resource_namespace_02" {
-	uuid_count = "2"
+resource "pokedex_pokemon" "pokemon_encounter_02" {
+	pokemon_id = "132"
 }
